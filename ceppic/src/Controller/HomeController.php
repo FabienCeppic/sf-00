@@ -20,4 +20,15 @@ class HomeController extends AbstractController
             'liste_article' => $listeArticle,
         ]);
     }
+
+    #[Route('/article/{id}', name: 'route_article')]
+    public function article(int $id, ArticleRepository $repo): Response 
+    {
+
+        $article = $repo->find($id);
+
+        return $this->render('home/article.html.twig', [
+            'article' => $article, 
+        ]);
+    }
 }
