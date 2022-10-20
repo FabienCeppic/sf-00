@@ -21,9 +21,13 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Article::class)]
     private Collection $articles;
 
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Formation::class)]
+    private Collection $no;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->no = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -34,6 +38,11 @@ class Categorie
     public function getTitre(): ?string
     {
         return $this->titre;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitre();
     }
 
     public function setTitre(string $titre): self
@@ -67,6 +76,36 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($article->getCategorie() === $this) {
                 $article->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getNo(): Collection
+    {
+        return $this->no;
+    }
+
+    public function addNo(Formation $no): self
+    {
+        if (!$this->no->contains($no)) {
+            $this->no->add($no);
+            $no->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNo(Formation $no): self
+    {
+        if ($this->no->removeElement($no)) {
+            // set the owning side to null (unless already changed)
+            if ($no->getCategorie() === $this) {
+                $no->setCategorie(null);
             }
         }
 
