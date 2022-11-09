@@ -18,6 +18,11 @@
 					<a class="nav-link" href="/categorie">Catégories</a>
 				</li>
 			</ul>
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<a class="btn btn-success" href="/logout">Déconnexion</a>
+			{% else %}
+				<a class="btn btn-success" href="/login">Connexion</a>
+			{% endif %}
 		</div>
 	</nav>
 </header>
