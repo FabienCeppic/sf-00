@@ -18,18 +18,11 @@
 		{% endblock %}
 	</head>
 	<body>
-		<header>
-			<nav>
-				<ul>
-					<li><a href="/">Home</a></li>
-				</ul>
-			</nav>
-		</header>
+		{% include '_layout/_header.html.twig' %}
 		<main>
-			{% block body %}{% endblock %}
-		</main>
-		<footer>
-			<p>Sité créé par Fabien - 2022</p>
-		</footer>
-	</body>
-</html>
+			<div class="container-fluid"> {% block body %}{% endblock %}
+				</div>
+			</main>
+			{% include '_layout/_footer.html.twig' %}
+		</body>
+	</html>
